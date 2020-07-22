@@ -106,3 +106,8 @@ input[type=checkbox]:focus {
 .contact-card > p {
   font-size: 12px;
 }
+.todo-completed{
+  text-decoration: line-through;
+  font-style: italic;
+  color: #cdcdcd;
+}

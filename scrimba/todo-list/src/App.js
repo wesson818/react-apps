@@ -7,19 +7,71 @@ import jokesData from './data/jokesData';
 import Product from './components/Product';
 import productsData from './data/vschoolProducts';
 import todoData from './data/todoData';
+import Counter from './components/Counter';
+import randomColor from 'randomcolor'
  
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      todoData
+      todos:todoData,
+      count:0,
+      color:"",
+      isLoading: true
     }
-    this.onChange = this.onChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.countAdd = this.countAdd.bind(this)
+    this.countMin = this.countMin.bind(this)
   }
-  
-  onChange(id){
-    console.log(id)
-    // this.setState()
+  componentDidMount() {
+    setTimeout(() => {
+        this.setState({
+            isLoading: false
+          })
+      }, 1500)
+  }
+  countAdd(){
+    this.setState(prevState => {
+        return {
+            count: prevState.count + 1
+        }
+    })
+  }
+  countMin(){
+    this.setState(prevState => {
+        return {
+            count: prevState.count - 1
+        }
+    })
+  }
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.count!=this.state.count){
+      const newColor = randomColor()
+      this.setState({color: newColor})
+    }
+  }
+  handleChange(id){
+    console.log("id",id)
+    // console.log("this.state.todos",this.state.todos)
+    this.setState(prevState => {
+      const updatedTodos = prevState.todos.map(todo=>{
+        if(todo.id===id){
+          // todo.completed: !todo.completed
+          // DO NOT change this way, which change global state value, will not work in strict mode
+          // create and return new object and assign to the prevState
+          return {
+              ...todo,
+              completed: !todo.completed
+          }
+        }
+        return todo
+      })
+      // console.log("prevState.todos",prevState.todos)
+      // console.log("updatedTodos",updatedTodos)
+      return{
+        todos:updatedTodos
+      }
+    })
   }
 
   render(){
@@ -45,7 +97,7 @@ class App extends Component {
   }
 
   //List todo
-  const todoComponent = todoData.map(todo => <TodoItem key={todo.id} isChecked={todo.completed} todoText={todo.text} />)
+  const todoComponent = this.state.todos.map(todo => <TodoItem key={todo.id} id={todo.id} isChecked={todo.completed} todoText={todo.text} handleChange={this.handleChange} />)
 
   //Joke
   const jokeComponents = jokesData.map(joke => <Joke key={joke.id} question={joke.question} punchLine={joke.punchLine} />)
@@ -61,7 +113,10 @@ class App extends Component {
   )
   return (
     <div className="App App-header">
-      <h2 style={h2Style}>Good {timeOfDay}  {firstname} {lastname}</h2>
+      {this.state.isLoading? 
+      <h2>Loading...</h2>:<h2 style={h2Style}>Good {timeOfDay}  {firstname} {lastname}</h2>}
+      <Counter color={this.state.color} count={this.state.count} countAdd={this.countAdd} countMin={this.countMin} />
+
       {/* <h2 style={h2Style}>Good {hours < 12?"morning":"afternoon"}  {firstname} {lastname}</h2> */}
       {/* <h2>Hi {`${firstname} ${lastname}`}</h2> */}
       <h3>Todo List</h3>
