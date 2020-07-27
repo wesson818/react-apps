@@ -11,6 +11,7 @@ import jokesData from './data/jokesData';
 import productsData from './data/vschoolProducts';
 import Form from './Form';
 import randomColor from 'randomcolor'
+import Calculator from './components/LiftingState'
 
 class App extends Component {
   constructor(){
@@ -77,7 +78,9 @@ class App extends Component {
       <div className="App App-header">
         <Header />
         {this.state.loading?"Loading...":this.state.character.name}
-        <Counter color={this.state.color} count={this.state.count} countAdd={this.countAdd} countMin={this.countMin} />
+        <Counter color={this.state.color} count={this.state.count} countAdd={this.countAdd} countMin={this.countMin} /><br />
+        Lifting State:
+        <Calculator />
         <Form />
         <MyInfo />
         <div className="contacts">
