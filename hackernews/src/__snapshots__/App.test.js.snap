@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App has a valid snapshot 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <h2>
+      Hi 
+      WenJing Zhang
+      , 
+      Welcome to the Road to learn React!
+    </h2>
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <div
+      className="interactions"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        Search
+         
+        <input
+          onChange={[Function]}
+          type="text"
+          value="redux"
+        />
+        <button>
+          Search
+        </button>
+      </form>
+      <p>
+        redux
+      </p>
+    </div>
+    <div
+      className="table"
+    />
+    <div
+      className="interactions"
+    >
+      <button
+        onClick={[Function]}
+      >
+        More
+      </button>
+    </div>
+  </header>
+</div>
+`;
