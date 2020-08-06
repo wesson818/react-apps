@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import MyInfo from './components/MyInfo';
+import InputRef from './components/inputRef';
 import Footer from './components/Footer';
 import ContactCard from './components/ContactCard';
 import Counter from './components/Counter';
@@ -78,6 +79,7 @@ class App extends Component {
       <div className="App App-header">
         <Header />
         {this.state.loading?"Loading...":this.state.character.name}
+        <InputRef />
         <Counter color={this.state.color} count={this.state.count} countAdd={this.countAdd} countMin={this.countMin} /><br />
         Lifting State:
         <Calculator />
